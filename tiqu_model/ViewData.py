@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # 读取文件
-tiqu = pd.read_csv('tiqu.csv')
+tiqu = pd.read_csv('./Data/tiqu.csv')
 fig1 = plt.figure()
 sns.regplot(x='x2',y='y2',data=tiqu)
 fig1.show()

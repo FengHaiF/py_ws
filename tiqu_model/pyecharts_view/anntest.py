@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_absolute_error
 import matplotlib.pyplot as plt
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 用来正常显示中文标签
-from collections import deque
+
 
 
 # 读取文件

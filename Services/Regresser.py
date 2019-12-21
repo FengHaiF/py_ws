@@ -3,7 +3,8 @@ import pickle
    使用 y = predict(x) 进行神经网络预测;
    如果需要test 需要包含下面几个库"""
 # import pandas as pd
-
+import numpy as np
+import sqlite3
 
 class Ensemble(object):
 
@@ -58,4 +59,48 @@ class Ensemble(object):
         y_predicts['y2'] = y_predict[0]
 
         return y_predicts
+
+    def update_model(self,sqlQuery,batch_size:int):
+        """
+        :param sqlQuery: 数据库查询
+        :param batch_size: 训练的最小批大小
+        :return:
+        """
+
+        # TODO: directly fit model from sql
+        try:
+            # conn = sqlite3.connect(db_path)
+            # sqlQuery = conn.cursor()
+            # 获取所有评论
+            sqlQuery.execute("SELECT * FROM  records")
+            results = sqlQuery.fetchmany(batch_size)
+
+            y1_model = self.models['y1']
+            y2_model = self.models['y2']
+
+            print("update model...")
+            while results:
+                data = np.array(results)
+                X_train = data[:,:4]
+                y1_model.partial_fit(X_train, data[:, 4])
+                y2_model.partial_fit(X_train, data[:, 5])
+                results = sqlQuery.fetchmany(batch_size)
+
+            y1_pkl_filename = 'Ensemble/ensemble_ml.pkl'
+            pickle.dump(y1_model, open(y1_pkl_filename, 'wb'))
+
+            y2_pkl_filename = 'Ensemble/ensemble_ml_y2.pkl'
+            pickle.dump(y2_model, open(y2_pkl_filename, 'wb'))
+
+            # update temp model
+            new_model = {'y1': y1_model, 'y2': y2_model}
+            self.models.update(new_model)
+        except  Exception as e:
+            print('upate model failed...:',e)
+
+        print("update model succed !!!")
+
+
+
+
 

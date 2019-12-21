@@ -5,6 +5,7 @@
 import socket
 import threading
 import socketserver
+import sqlite3
 import json, types,string
 import os, time
 import numpy as np
@@ -18,6 +19,8 @@ warnings.filterwarnings(action='ignore', \
 ensemble = Ensemble()
 ensemble.load_model()
 
+db_path = 'db/test_records.db'
+
 
 class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
     # def __init__(self, request, client_address, server):
@@ -26,21 +29,75 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
     #     self.ensemble = Ensemble()
     #     self.ensemble.load_model()
     #     print("ThreadedTCPRequestHandler init ...")
+    def setup(self): # 每次连接都会调用
+        # self.ensemble = Ensemble()
+        # self.ensemble.load_model()
+        self.conn = sqlite3.connect(db_path)
+        print("ThreadedTCPRequestHandler init ...")
 
     def handle(self):
         print("handeling...")
         data = self.request.recv(102400)
         jdata = json.loads(data,encoding="utf-8")     #编码转换
         # print( "test predict ",ensemble.predict(np.array([[1,1,1,1]])))
-        predicts = {}
-        for id in jdata.keys():
-            # print(id, jdata[id]["Num"],jdata[id]["x2"],jdata[id]["x4"],jdata[id]["temp"])
-            featrues = np.array([[jdata[id]["Num"],jdata[id]["x2"],jdata[id]["x4"],jdata[id]["temp"]]])
-            predicts[id] = ensemble.predict(featrues)
-        # 下面是返回给client的json格式数据
-        jresp = json.dumps(predicts)
-        print(jresp)
-        self.request.sendall(jresp.encode('utf-8'))
+        # Response = {}
+        # TODO: 根据jdata params 参数确定运算类型
+        if jdata['params'] =='predict':
+            predicts = {}
+            datasets = jdata['data']
+            for id in datasets.keys():
+                # print(id, jdata[id]["Num"],jdata[id]["x2"],jdata[id]["x4"],jdata[id]["temp"])
+                featrues = np.array([[datasets[id]["Num"],datasets[id]["x2"],datasets[id]["x4"],datasets[id]["temp"]]])
+                predicts[id] = ensemble.predict(featrues)
+            # 下面是返回给client的json格式数据
+            jresp = json.dumps(predicts)
+            print(jresp)
+            self.request.sendall(jresp.encode('utf-8'))
+        elif jdata['params'] == 'record':
+            sqlQuery = self.conn.cursor()
+            datasets = jdata['data']
+            for id in datasets.keys():
+                # print(id, jdata[id]["Num"],jdata[id]["x2"],jdata[id]["x4"],jdata[id]["temp"])
+                featrues = \
+                    [datasets[id]["Num"], datasets[id]["x2"], datasets[id]["x4"], \
+                     datasets[id]["temp"],datasets[id]["y1"],datasets[id]["y2"]]
+                sqlQuery.execute("INSERT INTO records (num,x2,x4,temp,y1,y2) VALUES "
+                          "(?,?,?,?,?,?)", \
+                          (featrues[0], featrues[1], \
+                           featrues[2], featrues[3], \
+                           featrues[4], featrues[5]))
+                # predicts[id] = ensemble.predict(featrues)
+            # 下面是返回给client的json格式数据
+            # jresp = json.dumps(predicts)
+            tab_len = sqlQuery.execute("SELECT COUNT(ID) FROM RECORDS")
+            self.conn.commit()
+            predicts = {'flag':True,\
+                'insert_len':len(datasets),\
+                        'table_len':tab_len,\
+                        'tab_limit':20000 } #'record finished!'
+
+            jresp = json.dumps(predicts)
+            print(jresp)
+            self.request.sendall(jresp.encode('utf-8'))
+
+        elif jdata['params'] == 'train':
+            sqlQuery = self.conn.cursor()
+            batch_size = jdata['batch_size']
+            tab_len = sqlQuery.execute("SELECT COUNT(ID) FROM RECORDS") # 数据库记录数
+            predicts = {'flag':True,'table_len':tab_len,\
+                        'tab_limit':20000}
+            ensemble.update_model(sqlQuery,batch_size)
+
+            jresp = json.dumps(predicts)
+            print(jresp)
+            self.request.sendall(jresp.encode('utf-8'))
+
+
+    def __del__(self):
+        self.conn.close()
+        print("del fun run finished...")
+
+
 
  
 
