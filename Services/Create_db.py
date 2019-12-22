@@ -7,21 +7,21 @@ db_path = 'db/test.db'
 def create_db(db_path):
     conn = sqlite3.connect(db_path)
     sqlQuery = conn.cursor()
-    # sqlQuery.execute("CREATE TABLE RECORDS \
-    #           (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
-    #            num real NOT NULL,\
-    #            x2 real NOT NULL,\
-    #            x4 real NOT NULL,\
-    #            temp real NOT NULL,\
-    #             y1 real, y2 real,) ")
-
     sqlQuery.execute("CREATE TABLE RECORDS \
-                  (\
-                   num real NOT NULL,\
-                   x2 real NOT NULL,\
-                   x4 real NOT NULL,\
-                   temp real NOT NULL,\
-                    y1 real, y2 real) ")
+              (ID INTEGER PRIMARY KEY AUTOINCREMENT,\
+               num real NOT NULL,\
+               x2 real NOT NULL,\
+               x4 real NOT NULL,\
+               temp real NOT NULL,\
+                y1 real, y2 real,) ")
+
+    # sqlQuery.execute("CREATE TABLE RECORDS \
+    #               (\
+    #                num real NOT NULL,\
+    #                x2 real NOT NULL,\
+    #                x4 real NOT NULL,\
+    #                temp real NOT NULL,\
+    #                 y1 real, y2 real) ")
     print("Create {0} db finish".format(db_path))
 
     conn.commit()
@@ -67,8 +67,10 @@ def delete_db(db_path):
     delete_len = 20
     # cursor.execute("DELETE FROM RECORDS WHERE id < "+ str(delete_len) )
     # 删除前 delete_len 记录
-    tab_len = cursor.execute("SELECT count(*) from RECORDS")
-    print(list(tab_len)[0], "  tab_len")
+    tab_len = cursor.execute("SELECT count(id) from RECORDS")
+    tab_len = list(tab_len)[0][0]
+    print(tab_len)
+    # print(list(tab_len)[0][0], "  tab_len",type(tab_len))
     # cursor.execute("DELETE FROM RECORDS WHERE id in (\
     #                 SELECT id from RECORDS order by id asc\
     #                  limit "+str(delete_len) +")")

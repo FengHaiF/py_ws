@@ -68,6 +68,9 @@ class Ensemble(object):
         """
 
         # TODO: directly fit model from sql
+        failed = False
+        fail_reason = ""
+
         try:
             # conn = sqlite3.connect(db_path)
             # sqlQuery = conn.cursor()
@@ -81,9 +84,9 @@ class Ensemble(object):
             print("update model...")
             while results:
                 data = np.array(results)
-                X_train = data[:,:4]
-                y1_model.partial_fit(X_train, data[:, 4])
-                y2_model.partial_fit(X_train, data[:, 5])
+                X_train = data[:,1:5]
+                y1_model.partial_fit(X_train, data[:, 5])
+                y2_model.partial_fit(X_train, data[:, 6])
                 results = sqlQuery.fetchmany(batch_size)
 
             y1_pkl_filename = 'Ensemble/ensemble_ml.pkl'
@@ -96,6 +99,7 @@ class Ensemble(object):
             new_model = {'y1': y1_model, 'y2': y2_model}
             self.models.update(new_model)
         except  Exception as e:
+            failed = True
             print('upate model failed...:',e)
 
         print("update model succed !!!")

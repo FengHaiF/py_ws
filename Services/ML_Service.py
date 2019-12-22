@@ -11,15 +11,33 @@ import os, time
 import numpy as np
 import warnings
 from Regresser import Ensemble
+from parameters import Parameters
 
 warnings.filterwarnings(action='ignore', \
              module='sklearn')
+
+pa = Parameters()
 
 # 导入ensemble 的模型
 ensemble = Ensemble()
 ensemble.load_model()
 
 db_path = 'db/test_records.db'
+
+def deleteOldRecord(cursor,drop_len):
+    tab_len = cursor.execute("SELECT count(id) from RECORDS")
+    tab_len = list(tab_len)[0][0]
+    if tab_len > pa.record_limit:
+        cursor.execute("DELETE FROM RECORDS WHERE id in (\
+                            SELECT id from RECORDS order by id asc\
+                             limit " + str(drop_len) + ")")
+        tab_len = pa.record_limit - drop_len
+
+    return tab_len
+
+
+
+
 
 
 class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
@@ -53,28 +71,31 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
             jresp = json.dumps(predicts)
             print(jresp)
             self.request.sendall(jresp.encode('utf-8'))
+
         elif jdata['params'] == 'record':
-            sqlQuery = self.conn.cursor()
+            cursor = self.conn.cursor()
             datasets = jdata['data']
             for id in datasets.keys():
                 # print(id, jdata[id]["Num"],jdata[id]["x2"],jdata[id]["x4"],jdata[id]["temp"])
                 featrues = \
                     [datasets[id]["Num"], datasets[id]["x2"], datasets[id]["x4"], \
                      datasets[id]["temp"],datasets[id]["y1"],datasets[id]["y2"]]
-                sqlQuery.execute("INSERT INTO records (num,x2,x4,temp,y1,y2) VALUES "
+                cursor.execute("INSERT INTO records (num,x2,x4,temp,y1,y2) VALUES "
                           "(?,?,?,?,?,?)", \
                           (featrues[0], featrues[1], \
                            featrues[2], featrues[3], \
                            featrues[4], featrues[5]))
                 # predicts[id] = ensemble.predict(featrues)
             # 下面是返回给client的json格式数据
+            drop_len = int( pa.record_limit* pa.drop_policy )
+            tab_len = deleteOldRecord(cursor, drop_len)
             # jresp = json.dumps(predicts)
-            tab_len = sqlQuery.execute("SELECT COUNT(ID) FROM RECORDS")
+            # tab_len = sqlQuery.execute("SELECT COUNT(ID) FROM RECORDS")
             self.conn.commit()
             predicts = {'flag':True,\
                 'insert_len':len(datasets),\
-                        'table_len':tab_len,\
-                        'tab_limit':20000 } #'record finished!'
+                        'record_len':tab_len,\
+                        'record_limit':pa.record_limit } #'record finished!'
 
             jresp = json.dumps(predicts)
             print(jresp)
@@ -82,11 +103,10 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
 
         elif jdata['params'] == 'train':
             sqlQuery = self.conn.cursor()
-            batch_size = jdata['batch_size']
             tab_len = sqlQuery.execute("SELECT COUNT(ID) FROM RECORDS") # 数据库记录数
             predicts = {'flag':True,'table_len':tab_len,\
                         'tab_limit':20000}
-            ensemble.update_model(sqlQuery,batch_size)
+            ensemble.update_model(sqlQuery,pa.batch_size)
 
             jresp = json.dumps(predicts)
             print(jresp)
