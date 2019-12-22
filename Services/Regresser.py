@@ -100,9 +100,12 @@ class Ensemble(object):
             self.models.update(new_model)
         except  Exception as e:
             failed = True
+            fail_reason += e
             print('upate model failed...:',e)
 
-        print("update model succed !!!")
+        print("update model finished !!!")
+
+        return failed, fail_reason
 
 
 
