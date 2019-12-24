@@ -13,6 +13,7 @@ import warnings
 from Regresser import Ensemble
 from parameters import Parameters
 
+from opt import solve
 warnings.filterwarnings(action='ignore', \
              module='sklearn')
 
@@ -25,6 +26,7 @@ ensemble.load_model()
 db_path = 'db/test_records.db'
 
 def deleteOldRecord(cursor,drop_len):
+    """去除旧的记录"""
     tab_len = cursor.execute("SELECT count(id) from RECORDS")
     tab_len = list(tab_len)[0][0]
     if tab_len > pa.record_limit:
@@ -35,6 +37,16 @@ def deleteOldRecord(cursor,drop_len):
 
     return tab_len
 
+
+def train_policy(cursor,train_size):
+    """ 训练集的选择 """
+    # train_size = train_params['train_coff']*pa.min_trainsize
+    # 训练次数不能超过 tab_len
+    cursor.execute("SELECT num,x2 ,x4 ,temp,y1,y2  FROM RECORDS order by id desc limit "\
+                        + str(train_size))
+
+    # 先训练旧的，因为优先去除其中
+    return cursor
 
 
 
@@ -54,11 +66,13 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
         print("ThreadedTCPRequestHandler init ...")
 
     def handle(self):
+
         print("handeling...")
         data = self.request.recv(102400)
         jdata = json.loads(data,encoding="utf-8")     #编码转换
         # print( "test predict ",ensemble.predict(np.array([[1,1,1,1]])))
         # Response = {}
+        cursor = self.conn.cursor()
         # TODO: 根据jdata params 参数确定运算类型
         if jdata['params'] =='predict':
             predicts = {}
@@ -73,7 +87,7 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
             self.request.sendall(jresp.encode('utf-8'))
 
         elif jdata['params'] == 'record':
-            cursor = self.conn.cursor()
+            # cursor = self.conn.cursor()
             datasets = jdata['data']
             for id in datasets.keys():
                 # print(id, jdata[id]["Num"],jdata[id]["x2"],jdata[id]["x4"],jdata[id]["temp"])
@@ -87,26 +101,60 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
                            featrues[4], featrues[5]))
                 # predicts[id] = ensemble.predict(featrues)
             # 下面是返回给client的json格式数据
-            drop_len = int( pa.record_limit* pa.drop_policy )
+            drop_len = int(pa.record_limit* pa.drop_policy )
             tab_len = deleteOldRecord(cursor, drop_len)
             # jresp = json.dumps(predicts)
             # tab_len = sqlQuery.execute("SELECT COUNT(ID) FROM RECORDS")
             self.conn.commit()
-            predicts = {'flag':True,\
+            cursor.execute("select max(id) from records")
+            max_id = cursor.fetchone()
+
+            predicts = {'record':True,\
                 'insert_len':len(datasets),\
-                        'record_len':tab_len,\
+                        'record_len':tab_len, 'max_id': max_id, \
                         'record_limit':pa.record_limit } #'record finished!'
 
             jresp = json.dumps(predicts)
             print(jresp)
             self.request.sendall(jresp.encode('utf-8'))
 
+        elif jdata['params'] == 'clear':
+            #truncate table set id eq zero
+            # 清空数据库，设置 id位 0
+            # cursor = self.conn.cursor()
+            cursor.execute("DELETE FROM RECORDS")
+            cursor.execute("UPDATE sqlite_sequence SET seq = 0 WHERE name = 'RECORDS' ")
+            self.conn.commit()
+            predicts = {'clear':True}
+            jresp = json.dumps(predicts)
+            print(jresp)
+            self.request.sendall(jresp.encode('utf-8'))
+
+        elif jdata['params'] == 'optimize':
+            # optimize model to find solve
+            Num = jdata['Num']
+            predicts ={'MachineNum':Num}
+            if jdata['model'] == 'ann':
+                pass
+            elif jdata['model']== 'ensemble':
+                x,y =solve(ensemble,Num)
+                predicts.update({'solve':'ensemble',\
+                         'x':x,'y1':y[0],'y2':y[1]})
+
+            jresp = json.dumps(predicts)
+            print(jresp)
+            self.request.sendall(jresp.encode('utf-8'))
+
         elif jdata['params'] == 'train':
-            sqlQuery = self.conn.cursor()
-            tab_len = sqlQuery.execute("SELECT COUNT(ID) FROM RECORDS") # 数据库记录数
-            predicts = {'flag':True,'table_len':tab_len,\
-                        'tab_limit':20000}
-            ensemble.update_model(sqlQuery,pa.batch_size)
+            # cursor = self.conn.cursor()
+            tab_len = cursor.execute("SELECT COUNT(ID) FROM RECORDS") # 数据库记录数
+
+            train_size = jdata['train_coff'] * pa.min_trainsize
+            cursor = train_policy(cursor, train_size)
+            ensemble.update_model(cursor,pa.batch_size)
+            predicts = {'train': True, 'table_len': tab_len.fetchone(), \
+                        'train_size':train_size,'min_trainsize':pa.min_trainsize,\
+                        'batch_size':pa.batch_size,'max_trainsize': pa.max_trainsize }
 
             jresp = json.dumps(predicts)
             print(jresp)

@@ -5,7 +5,10 @@ import pickle
 # import pandas as pd
 import numpy as np
 import sqlite3
-
+import warnings
+warnings.filterwarnings(action='ignore', \
+             module='sklearn')
+             
 class Ensemble(object):
 
     def __init__(self):
@@ -60,9 +63,9 @@ class Ensemble(object):
 
         return y_predicts
 
-    def update_model(self,sqlQuery,batch_size:int):
+    def update_model(self,cursor,batch_size):
         """
-        :param sqlQuery: 数据库查询
+        :param cursor: 数据库查询
         :param batch_size: 训练的最小批大小
         :return:
         """
@@ -75,8 +78,8 @@ class Ensemble(object):
             # conn = sqlite3.connect(db_path)
             # sqlQuery = conn.cursor()
             # 获取所有评论
-            sqlQuery.execute("SELECT * FROM  records")
-            results = sqlQuery.fetchmany(batch_size)
+            # sqlQuery.execute("SELECT * FROM  records")
+            results = cursor.fetchmany(batch_size)
 
             y1_model = self.models['y1']
             y2_model = self.models['y2']
@@ -87,7 +90,7 @@ class Ensemble(object):
                 X_train = data[:,1:5]
                 y1_model.partial_fit(X_train, data[:, 5])
                 y2_model.partial_fit(X_train, data[:, 6])
-                results = sqlQuery.fetchmany(batch_size)
+                results = cursor.fetchmany(batch_size)
 
             y1_pkl_filename = 'Ensemble/ensemble_ml.pkl'
             pickle.dump(y1_model, open(y1_pkl_filename, 'wb'))
