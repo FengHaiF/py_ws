@@ -25,7 +25,7 @@ class Ensemble(object):
         models = pickle.load(open(y2_filepath,'rb')) # {names:model}
         self.models['y2']= models
         self.weights['y2'] = [0.2,0.2,0.2,0.2,0.2]
-        print("load models from files using pickle")
+        print("load ensemble models from files using pickle")
 
 
     def predict(self,X_test):
@@ -110,7 +110,83 @@ class Ensemble(object):
 
         return failed, fail_reason
 
+class ANN(object):
 
+    def __init__(self):
+        self.Transform = None
+        self.model = None
+    
+    def load_model(self,folder_path='ANN',model_name='ann'):
+        y1_filepath = folder_path +'/'+model_name +'.pkl'
+        pipline = pickle.load(open(y1_filepath,'rb')) # {names:model}
+        self.model = pipline['ann'] 
+        self.Transform = pipline['scaler_X'] 
+        print("load ann models from files using pickle")
+
+
+    def predict(self,X_test):
+        """
+            ['RANSACRegressor+RandomForestRegressor', 0.08121470017053545]
+            ['RANSACRegressor', 'RandomForestRegressor']
+            RANSACRegressor  score: 0.2120331572321849
+            RandomForestRegressor  score: 0.14285714285714285
+            根据 score视情况设置合适的权重weights
+            weights=[0.43,0.57]
+            test [y1]:   0.07817797547999396
+            train [y1]:   0.1510962099583446
+        """
+        # models = pickle.load(open(file_path,'rb')) # {names:model}
+   
+        x_test = self.Transform.transform(X_test)
+        # y_predict_detail = []
+        y_predict = self.model.predict(x_test)
+         # y_predict_detail.append(y_predict_temp)
+        y_predicts = {'y1':y_predict[0],'y2':y_predict[1]}
+
+        return y_predicts
+
+    def update_model(self,cursor,batch_size):
+        """
+        :param cursor: 数据库查询
+        :param batch_size: 训练的最小批大小
+        :return:
+        """
+
+        # TODO: directly fit model from sql
+        failed = False
+        fail_reason = ""
+
+        try:
+            # conn = sqlite3.connect(db_path)
+            # sqlQuery = conn.cursor()
+            # 获取所有评论
+            # sqlQuery.execute("SELECT * FROM  records")
+            results = cursor.fetchmany(batch_size)
+
+            model = self.model
+
+            print("update model...")
+            while results:
+                data = np.array(results)
+                X_train = data[:,1:5]
+                x_train = self.Transform.transform(X_train)
+                model.partial_fit(x_train, data[:, 5:])
+                results = cursor.fetchmany(batch_size)
+
+            pkl_filename = 'ANN/ann.pkl'
+            pipline = {'scaler_X':self.Transform,'ann':model}
+            pickle.dump(pipline, open(pkl_filename, 'wb'))
+
+            self.model = model
+
+        except  Exception as e:
+            failed = True
+            fail_reason += e
+            print('upate ann model failed...:',e)
+
+        print("update ann model finished !!!")
+
+        return failed, fail_reason
 
 
 
