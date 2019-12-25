@@ -88,8 +88,10 @@ class Ensemble(object):
             while results:
                 data = np.array(results)
                 X_train = data[:,1:5]
-                y1_model.partial_fit(X_train, data[:, 5])
-                y2_model.partial_fit(X_train, data[:, 6])
+                for model in y1_model.values:
+                    model.partial_fit(X_train, data[:, 5])
+                for model in y2_model.values:
+                    model.partial_fit(X_train, data[:, 6])
                 results = cursor.fetchmany(batch_size)
 
             y1_pkl_filename = 'Ensemble/ensemble_ml.pkl'

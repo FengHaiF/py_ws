@@ -10,7 +10,7 @@ import json, types,string
 import os, time
 import numpy as np
 import warnings
-from Regresser import Ensemble
+from Regresser import Ensemble,ANN
 from parameters import Parameters
 
 from opt import solve
@@ -22,6 +22,9 @@ pa = Parameters()
 # 导入ensemble 的模型
 ensemble = Ensemble()
 ensemble.load_model()
+
+ann = ANN()
+ann.load_model()
 
 db_path = 'db/test_records.db'
 
@@ -80,7 +83,10 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
             for id in datasets.keys():
                 # print(id, jdata[id]["Num"],jdata[id]["x2"],jdata[id]["x4"],jdata[id]["temp"])
                 featrues = np.array([[datasets[id]["Num"],datasets[id]["x2"],datasets[id]["x4"],datasets[id]["temp"]]])
-                predicts[id] = ensemble.predict(featrues)
+                if jdata['method'] == 'ensemble':
+                    predicts[id] = ensemble.predict(featrues)
+                elif jdata['method'] == 'ann':
+                    predicts[id] = ann.predict(featrues)
             # 下面是返回给client的json格式数据
             jresp = json.dumps(predicts)
             print(jresp)
@@ -134,9 +140,11 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
             # optimize model to find solve
             Num = jdata['Num']
             predicts ={'MachineNum':Num}
-            if jdata['model'] == 'ann':
-                pass
-            elif jdata['model']== 'ensemble':
+            if jdata['method'] == 'ann':
+                x, y = solve(ann, Num)
+                predicts.update({'solve': 'ann', \
+                                 'x': x, 'y1': y[0], 'y2': y[1]})
+            elif jdata['method']== 'ensemble':
                 x,y =solve(ensemble,Num)
                 predicts.update({'solve':'ensemble',\
                          'x':x,'y1':y[0],'y2':y[1]})
@@ -151,7 +159,10 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
 
             train_size = jdata['train_coff'] * pa.min_trainsize
             cursor = train_policy(cursor, train_size)
-            ensemble.update_model(cursor,pa.batch_size)
+            if jdata['method'] == 'ensemble':
+                ensemble.update_model(cursor,pa.batch_size)
+            elif jdata['method'] == 'ann':
+                ensemble.update_model(cursor,pa.batch_size)
             predicts = {'train': True, 'table_len': tab_len.fetchone(), \
                         'train_size':train_size,'min_trainsize':pa.min_trainsize,\
                         'batch_size':pa.batch_size,'max_trainsize': pa.max_trainsize }
