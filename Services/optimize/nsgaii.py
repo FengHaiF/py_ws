@@ -6,7 +6,7 @@ from optimize.nd_sort import nd_sort
 from optimize.crowding_distance import crowding_distance
 from optimize.tournament import tournament
 from optimize.environment_selection import environment_selection
-from optimize.GLOBAL import Global
+from optimize.optset import Global
 
 from matplotlib import pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
