@@ -141,7 +141,7 @@ class ANN(object):
    
         x_test = self.Transform.transform(X_test)
         # y_predict_detail = []
-        y_predict = self.model.predict(x_test)
+        y_predict = self.model.predict(x_test)[0]
          # y_predict_detail.append(y_predict_temp)
         y_predicts = {'y1':y_predict[0],'y2':y_predict[1]}
 
