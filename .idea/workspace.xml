@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72aed0aa-a7ea-4bf1-8357-4b08fc821412" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/py_ws.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/py_ws.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Services/readme.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +42,20 @@
     <favorites_list name="py_ws" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Services/readme.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="307">
+                <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
+              </first_editor>
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -72,6 +83,7 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ad1786f9-bdf3-4da0-a3e0-437d2dd4fdc1/console.sql" />
         <option value="$PROJECT_DIR$/Services/parameters.py" />
         <option value="$PROJECT_DIR$/Services/ML_Service.py" />
+        <option value="$PROJECT_DIR$/Services/readme.md" />
       </list>
     </option>
   </component>
@@ -92,7 +104,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -115,6 +126,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -194,6 +206,7 @@
       <workItem from="1577086128754" duration="8517000" />
       <workItem from="1577280269241" duration="969000" />
       <workItem from="1577624498873" duration="7000" />
+      <workItem from="1577969803562" duration="351000" />
     </task>
     <task id="LOCAL-00001" summary="terminal">
       <created>1577280691588</created>
@@ -216,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577280798434</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add readme, bug fixed">
+      <created>1577969954727</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1577969954727</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -252,7 +272,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26249000" />
+    <option name="totallyTimeSpent" value="26600000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -265,8 +285,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978261" visible="true" weight="0.24932976" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4978261" visible="true" weight="0.25268096" />
       <window_info id="Structure" order="1" sideWeight="0.5021739" side_tool="true" weight="0.22429305" />
       <window_info id="Favorites" order="2" sideWeight="0.5021739" side_tool="true" weight="0.22429305" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -287,7 +308,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.21648793" />
-      <window_info active="true" anchor="right" id="Database" order="4" visible="true" weight="0.3297587" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.3297587" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +317,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="terminal" />
     <MESSAGE value="temp version." />
-    <option name="LAST_COMMIT_MESSAGE" value="temp version." />
+    <MESSAGE value="add readme, bug fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="add readme, bug fixed" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/py_ws$opt.coverage" NAME="opt Coverage Results" MODIFIED="1577280869949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Services" />
@@ -514,6 +536,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services/readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="307">
+            <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>

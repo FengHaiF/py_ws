@@ -143,11 +143,11 @@
 
 ## 3. 参考资料
 
-<a href="https://www.runoob.com/python/python-tutorial.html">python教程</a>
+<a href=https://www.runoob.com/python/python-tutorial.html>python教程</a>
 
- <a href="https://www.cnblogs.com/subconscious/p/5058741.html">神经网络</a>
+ <a href=https://www.cnblogs.com/subconscious/p/5058741.html>神经网络</a>
 
-<a href=“https://blog.csdn.net/zwqjoy/article/details/80431496”>集成学习</a>
+<a href=https://blog.csdn.net/zwqjoy/article/details/80431496>集成学习</a>
 
-<a href=“https://blog.csdn.net/google19890102/article/details/46507387”>机器学习模型加权融合</a>
+<a href=https://blog.csdn.net/google19890102/article/details/46507387>机器学习模型加权融合</a>
 
