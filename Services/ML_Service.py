@@ -14,8 +14,12 @@ from Regresser import Ensemble,ANN
 from parameters import Parameters
 
 from opt import solve
+
 warnings.filterwarnings(action='ignore', \
              module='sklearn')
+
+warnings.filterwarnings(action='ignore', \
+             module='optimize')
 
 pa = Parameters()
 
@@ -71,7 +75,7 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
     def handle(self):
 
         print("handeling...")
-        data = self.request.recv(102400)
+        data = self.request.recv(10240)
         jdata = json.loads(data,encoding="utf-8")     #编码转换
         # print( "test predict ",ensemble.predict(np.array([[1,1,1,1]])))
         # Response = {}
@@ -142,13 +146,15 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
             predicts ={'MachineNum':Num}
             if jdata['method'] == 'ann':
                 x, y = solve(ann, Num)
+                print("x := {}, y := {}".format(x,y))
                 predicts.update({'solve': 'ann', \
                                  'x': x, 'y1': y[0], 'y2': y[1]})
             elif jdata['method']== 'ensemble':
                 x,y =solve(ensemble,Num)
+                print("x := {}, y := {}".format(x, y))
                 predicts.update({'solve':'ensemble',\
                          'x':x,'y1':y[0],'y2':y[1]})
-
+            # print(predicts)
             jresp = json.dumps(predicts)
             print(jresp)
             self.request.sendall(jresp.encode('utf-8'))

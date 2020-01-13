@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="72aed0aa-a7ea-4bf1-8357-4b08fc821412" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/Services/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/ML_Client.py" beforeDir="false" afterPath="$PROJECT_DIR$/Services/ML_Client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/ML_Service.py" beforeDir="false" afterPath="$PROJECT_DIR$/Services/ML_Service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/db/test_records.db" beforeDir="false" afterPath="$PROJECT_DIR$/Services/db/test_records.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Services/opt.py" beforeDir="false" afterPath="$PROJECT_DIR$/Services/opt.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,27 +33,46 @@
     <option name="HIDDEN_KINDS">
       <set />
     </option>
-    <expand>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="test" type="feb32156:DbDataSourceImpl" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="py_ws" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Services/readme.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="307">
-                <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
-              </first_editor>
-              <second_editor />
+        <entry file="file://$PROJECT_DIR$/Services/ML_Service.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="157" column="29" lean-forward="true" selection-start-line="157" selection-start-column="29" selection-end-line="157" selection-end-column="29" />
+              <folding>
+                <element signature="e#79#92#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Services/opt.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="110">
+              <caret line="70" column="17" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Services/ML_Client.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="107" column="10" lean-forward="true" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -82,8 +104,10 @@
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/c704d9c2-fb9b-4b50-94d7-88d0e4cd029e/console.sql" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/ad1786f9-bdf3-4da0-a3e0-437d2dd4fdc1/console.sql" />
         <option value="$PROJECT_DIR$/Services/parameters.py" />
-        <option value="$PROJECT_DIR$/Services/ML_Service.py" />
         <option value="$PROJECT_DIR$/Services/readme.md" />
+        <option value="$PROJECT_DIR$/Services/ML_Client.py" />
+        <option value="$PROJECT_DIR$/Services/opt.py" />
+        <option value="$PROJECT_DIR$/Services/ML_Service.py" />
       </list>
     </option>
   </component>
@@ -115,12 +139,6 @@
               <item name="py_ws" type="b2602c69:ProjectViewProjectNode" />
               <item name="py_ws" type="462c0819:PsiDirectoryNode" />
               <item name="Services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="py_ws" type="b2602c69:ProjectViewProjectNode" />
-              <item name="py_ws" type="462c0819:PsiDirectoryNode" />
-              <item name="Services" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -158,7 +176,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.ML_Service">
+    <configuration name="ML_Service" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="py_ws" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Services" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Services/ML_Service.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="opt" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="py_ws" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -181,8 +221,26 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="pytest in ML_Client.py" type="tests" factoryName="py.test" temporary="true" nameIsGenerated="true">
+      <module name="py_ws" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Services" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_keywords" value="&quot;&quot;" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/Services/ML_Client.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ML_Service" />
+        <item itemvalue="Python tests.pytest in ML_Client.py" />
         <item itemvalue="Python.opt" />
       </list>
     </recent_temporary>
@@ -206,7 +264,9 @@
       <workItem from="1577086128754" duration="8517000" />
       <workItem from="1577280269241" duration="969000" />
       <workItem from="1577624498873" duration="7000" />
-      <workItem from="1577969803562" duration="351000" />
+      <workItem from="1577969803562" duration="617000" />
+      <workItem from="1578228035581" duration="1901000" />
+      <workItem from="1578897012470" duration="7387000" />
     </task>
     <task id="LOCAL-00001" summary="terminal">
       <created>1577280691588</created>
@@ -236,43 +296,50 @@
       <option name="project" value="LOCAL" />
       <updated>1577969954727</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add readme, bug fixed!">
+      <created>1577970206191</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1577970206191</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="pytest_in_load_ensemble_model_py - 2019.08.26 at 16h 07m 19s.xml">
-      <configuration name="pytest in load_ensemble_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 14h 43m 23s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_load_ensemble_model_py - 2019.08.26 at 16h 08m 08s.xml">
-      <configuration name="pytest in load_ensemble_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 14h 45m 48s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_load_ensemble_model_py - 2019.08.26 at 16h 09m 19s.xml">
-      <configuration name="pytest in load_ensemble_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 14h 50m 51s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_load_model_py - 2019.08.28 at 16h 05m 29s.xml">
-      <configuration name="pytest in load_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 14h 53m 07s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_load_model_py - 2019.08.28 at 16h 05m 55s.xml">
-      <configuration name="pytest in load_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 14h 54m 02s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_load_model_py - 2019.08.28 at 16h 09m 08s.xml">
-      <configuration name="pytest in load_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 14h 54m 22s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_load_model_py - 2019.08.28 at 16h 10m 48s.xml">
-      <configuration name="pytest in load_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 14h 54m 44s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_load_model_py - 2019.08.28 at 16h 12m 00s.xml">
-      <configuration name="pytest in load_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 17h 16m 58s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_load_model_py - 2019.08.28 at 16h 12m 55s.xml">
-      <configuration name="pytest in load_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 17h 18m 10s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
-    <history-entry file="pytest_in_load_model_py - 2019.12.08 at 18h 07m 47s.xml">
-      <configuration name="pytest in load_model.py" configurationId="tests" />
+    <history-entry file="pytest_in_ML_Client_py - 2020.01.13 at 18h 22m 07s.xml">
+      <configuration name="pytest in ML_Client.py" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26600000" />
+    <option name="totallyTimeSpent" value="36154000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -285,14 +352,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4978261" visible="true" weight="0.25268096" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4978261" visible="true" weight="0.14477211" />
       <window_info id="Structure" order="1" sideWeight="0.5021739" side_tool="true" weight="0.22429305" />
       <window_info id="Favorites" order="2" sideWeight="0.5021739" side_tool="true" weight="0.22429305" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32884097" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932975" weight="0.26062322" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49865952" visible="true" weight="0.5679887" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.42048517" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -300,7 +366,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32884097" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067025" side_tool="true" visible="true" weight="0.3286119" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5013405" side_tool="true" visible="true" weight="0.5679887" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32884097" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32884097" />
       <window_info anchor="bottom" id="Database Console" order="13" sideWeight="0.49932975" weight="0.3286119" />
@@ -308,7 +374,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.21648793" />
-      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.3297587" />
+      <window_info anchor="right" id="Database" order="4" visible="true" weight="0.17627347" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,10 +384,13 @@
     <MESSAGE value="terminal" />
     <MESSAGE value="temp version." />
     <MESSAGE value="add readme, bug fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="add readme, bug fixed" />
+    <MESSAGE value="add readme, bug fixed!" />
+    <option name="LAST_COMMIT_MESSAGE" value="add readme, bug fixed!" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/py_ws$pytest_in_ML_Client_py.coverage" NAME="pytest in ML_Client.py Coverage Results" MODIFIED="1578910926097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Services" />
     <SUITE FILE_PATH="coverage/py_ws$opt.coverage" NAME="opt Coverage Results" MODIFIED="1577280869949" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Services" />
+    <SUITE FILE_PATH="coverage/py_ws$ML_Service.coverage" NAME="ML_Service Coverage Results" MODIFIED="1578912253840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Services" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/tiqu_model/nn_view.py">
@@ -493,42 +562,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Services/ML_Client.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="81" column="10" lean-forward="true" selection-start-line="81" selection-start-column="10" selection-end-line="81" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://c92cb837-b59f-4e26-813c-7910587bc51e/schema/main/table/RECORDS">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true">
             <filter text="" />
           </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Services/opt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="81" column="10" selection-start-line="81" selection-start-column="10" selection-end-line="81" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Services/ML_Service.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1304">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#79#92#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -542,10 +581,71 @@
     <entry file="file://$PROJECT_DIR$/Services/readme.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="307">
-            <caret line="153" lean-forward="true" selection-start-line="153" selection-end-line="153" />
+          <first_editor relative-caret-position="359">
+            <caret line="139" column="3" selection-start-line="139" selection-start-column="3" selection-end-line="139" selection-end-column="3" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services/optimize/tournament.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="40" lean-forward="true" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services/optimize/GLOBAL.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="30" lean-forward="true" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services/optimize/nsgaii.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#41#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services/optimize/crowding_distance.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="27" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services/ML_Client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="107" column="10" lean-forward="true" selection-start-line="107" selection-start-column="10" selection-end-line="107" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services/opt.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="70" column="17" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Services/ML_Service.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="157" column="29" lean-forward="true" selection-start-line="157" selection-start-column="29" selection-end-line="157" selection-end-column="29" />
+          <folding>
+            <element signature="e#79#92#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

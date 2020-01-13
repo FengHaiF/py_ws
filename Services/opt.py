@@ -65,8 +65,8 @@ def solve(regress,Num):
     Global.load_regress(regress)
     nsga.setGlobal(Global)
     pop = nsga.run()
-    optimal_policy = pop[0][-1]
-    optimal_result = pop[1][-1]
+    optimal_policy = pop[0][-1].tolist()
+    optimal_result = pop[1][-1].tolist()
 
     return optimal_policy,optimal_result
 
